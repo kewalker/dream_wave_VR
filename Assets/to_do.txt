@@ -1,8 +1,0 @@
-Game Start
-	-> Change state
-		-> Instantiate menu
-		-> Set music
-		-> Play music
-
-	-> Click to start
-	

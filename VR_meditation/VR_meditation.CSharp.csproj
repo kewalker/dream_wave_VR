@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\audio_processing.cs" />
     <Compile Include="Assets\Scripts\audio_queue.cs" />
+    <Compile Include="Assets\Scripts\instantiate_to_beat.cs" />
     <Compile Include="Assets\Scripts\sample scripts\$hslcolor_211.cs" />
     <Compile Include="Assets\Scripts\sample scripts\Noise.cs" />
     <Compile Include="Assets\Scripts\sample scripts\Sinus.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Assets\Scripts\sample scripts\rotate_clockwise.cs" />
     <Compile Include="Assets\Scripts\sample scripts\set_parent.cs" />
     <Compile Include="Assets\Scripts\sample scripts\set_parent_2.cs" />
+    <Compile Include="Assets\Scripts\sample scripts\shrink_and_destroy.cs" />
     <Compile Include="Assets\Scripts\sample scripts\slow_move.cs" />
     <Compile Include="Assets\Scripts\sample scripts\spectrum.cs" />
     <Compile Include="Assets\Scripts\sample scripts\sphere_spectrum.cs" />

@@ -13,6 +13,9 @@ public class game_manager : MonoBehaviour
     public GameObject random_relax;
     public GameObject options;
 
+    public GameObject event_object;
+    public Object new_event_object;
+
     public AudioSource[] all_audio_sources;
     List<AudioSource> paused_audio;
 
@@ -25,8 +28,6 @@ public class game_manager : MonoBehaviour
     public Text message;
 
     public string state;
-
-    public GameObject test;
     
     // Use this for initialization
     void Awake()
@@ -124,13 +125,21 @@ public class game_manager : MonoBehaviour
         
     }
 
+    //turn on the main components of the game
     void start_session()
     {
+        //sound_1
         transform.GetChild(0).gameObject.SetActive(true);
+        //sound_2
         transform.GetChild(1).gameObject.SetActive(true);
+        //sound_3
         transform.GetChild(2).gameObject.SetActive(true);
+        //master_cube -> already active
         //transform.GetChild(3).gameObject.SetActive(true);
+        //particle system
         transform.GetChild(4).gameObject.SetActive(true);
+        //object_instantiator
+        transform.GetChild(5).gameObject.SetActive(true);
     }
 
     public void set_state (string new_state)
@@ -144,8 +153,13 @@ public class game_manager : MonoBehaviour
         return state;
     }
 
-    void Update()
+    public void instantiate_event ()
     {
+        if (new_event_object != null)
+        {
+            //Destroy(new_event_object);
+        }
 
+        new_event_object = Instantiate (event_object, new Vector3 (Random.Range(-5, 5), Random.Range(-3, 3), 5), Quaternion.identity);
     }
 }

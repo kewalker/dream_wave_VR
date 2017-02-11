@@ -7,7 +7,7 @@ public class look_towards : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        target = FindObjectOfType<Camera>().transform;
 	}
 	
 	// Update is called once per frame

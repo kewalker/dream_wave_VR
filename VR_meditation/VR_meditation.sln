@@ -1,7 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{F68E8C03-54A9-DD01-A732-2BF32317B2AA}") = "VR_meditation", "Assembly-CSharp.csproj", "{4A5E44F8-881B-08E7-15F1-463F069961C3}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VR_meditation.CSharp", "VR_meditation.CSharp.csproj", "{C7FE03E6-FBB7-F6B2-1289-56293C2EB9A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,15 +9,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4A5E44F8-881B-08E7-15F1-463F069961C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A5E44F8-881B-08E7-15F1-463F069961C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A5E44F8-881B-08E7-15F1-463F069961C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A5E44F8-881B-08E7-15F1-463F069961C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7FE03E6-FBB7-F6B2-1289-56293C2EB9A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FE03E6-FBB7-F6B2-1289-56293C2EB9A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FE03E6-FBB7-F6B2-1289-56293C2EB9A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FE03E6-FBB7-F6B2-1289-56293C2EB9A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

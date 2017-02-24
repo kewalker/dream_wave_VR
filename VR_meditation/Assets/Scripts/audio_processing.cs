@@ -8,11 +8,12 @@ public class audio_processing : MonoBehaviour
     public int z_offset;
 
     //reduced to 512 sampling the max is a bit much ;)
-    public int numOfSamples = 512; //Min: 64, Max: 8192
+    public int numOfSamples = 256; //Min: 64, Max: 8192
 
     //Removed Updated to AudioListener
     public AudioSource the_clip;
-    
+
+    public float max;
 
     public float[] freqData;
     public float[] band;
@@ -21,6 +22,7 @@ public class audio_processing : MonoBehaviour
 
     void Start()
     {
+        max = 0;
         //int z = 0;
 
         //while (z < 1)
@@ -60,10 +62,11 @@ public class audio_processing : MonoBehaviour
         for (int i = 0; i < band.Length; i++)
         {
             band[i] = 0;
-            g[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            //g[i].GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+            //try without the dots
+            /*g[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             g[i].GetComponent<Renderer>().material.color = GameObject.FindObjectOfType<Camera>().GetComponent<hsv>().colors[i];
-            g[i].transform.position = new Vector3(i+x_offset, y_offset, z_offset);
+            g[i].AddComponent<fade_in_mesh>();
+            g[i].transform.position = new Vector3(i+x_offset, y_offset, z_offset);*/
 
         }
 
@@ -73,6 +76,7 @@ public class audio_processing : MonoBehaviour
 
     private void check()
     {
+        max = 0;
         //Updated to Audio Listener this removes the tie to your audio source
         //Have one Audio Source in the scene playing, this allows multiple Listeners
         //to process the same Audio Source in a scene without tying up resources for
@@ -90,14 +94,21 @@ public class audio_processing : MonoBehaviour
             // find the max as the peak value in that frequency band.
             band[k] = (d > b) ? d : b;
 
-            if (i > (crossover - 3))
+            if (i > (crossover - 20))
             {
                 k++;
                 crossover *= 2;   // frequency crossover point for each band.
-                Vector3 tmp = new Vector3(g[k].transform.position.x, y_offset + (band[k] * 32), g[k].transform.position.z);
-                g[k].transform.position = tmp;
+                //Vector3 tmp = new Vector3(g[k].transform.position.x, y_offset + (band[k] * 32), g[k].transform.position.z);
+                //g[k].transform.position = tmp;
+
+                if (max < band[k])
+                {
+                    max = band[k];
+                }
+
                 band[k] = 0;
             }
         }
+        
     }
 }

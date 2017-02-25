@@ -11,7 +11,7 @@ public class hsv : MonoBehaviour {
     int num_colors;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
         //Get a random interval
         interval = Random.Range(0f, 0.25f);
@@ -41,7 +41,21 @@ public class hsv : MonoBehaviour {
             h += interval;
             //print("h: " + h);
             next = Color.HSVToRGB(h, s, v);
+
+            if (next.r == 0 && next.g == 0 && next.b == 0)
+            {
+                //i--;
+                print("howdy");
+            }
+
         }
+
+        
+    }
+
+    void Start ()
+    {
+        game_manager.instance.set_palette(colors);
     }
 	
 	// Update is called once per frame

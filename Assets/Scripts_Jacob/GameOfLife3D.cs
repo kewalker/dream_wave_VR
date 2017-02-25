@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using System.arr;
+
 
 public class GameOfLife3D : MonoBehaviour {
 
@@ -9,8 +11,13 @@ public class GameOfLife3D : MonoBehaviour {
 	int time;
 	int change = 60;
 
+    int x_offset;
+    int num_cubes;
+
 	int space = 2;
-	public GameObject cuber; 
+	public GameObject cuber;
+
+    public Color [] palette; 
 
 	// Use this for initialization
 	void Start () {
@@ -18,21 +25,28 @@ public class GameOfLife3D : MonoBehaviour {
 		int y = 10;
 		int z = 10;
 
-		cuber = GameObject.FindGameObjectWithTag( "why" );
+        x_offset = -10;
+        num_cubes = x;
+        //cuber = GameObject.FindGameObjectWithTag( "why" );
 
-		grid = new int[x, y, z];
+        palette = new Color[10];
+        StartCoroutine(wait_for_palette(0.05f));
+
+        grid = new int[x, y, z];
 		object_grid = new GameObject[x, y, z];
 		
 		for( int i = 0 ; i < grid.GetLength(0) ; i++ ){
 			for( int j = 0 ; j < grid.GetLength(1) ; j++ ){
 				for( int k = 0 ; k < grid.GetLength(2) ; k++ ){
 
-					int state = Random.Range(0, 2);
+                    //changed from Random.Range(0, 2) to reduce number of blocks killed on spawn
+					int state = Random.Range(0, 3);
 					grid[i , j, k] = state;
 
 					if( state == 1 ){
-						object_grid[i,j,k] = Instantiate( cuber, new Vector3(i*space, j*space, k*space), Quaternion.identity);
-					}
+						object_grid[i,j,k] = Instantiate( cuber, new Vector3(i*space+x_offset, j*space, k*space), Quaternion.identity);
+                        object_grid[i, j, k].GetComponent<Renderer>().material.color = palette[Random.Range(0, 10)];
+                    }
 				}
 			}
 		}
@@ -40,7 +54,7 @@ public class GameOfLife3D : MonoBehaviour {
 		string str = "";
 		for( int i = 0 ; i < grid.GetLength(0) ; i++ ){
 			for( int j = 0 ; j < grid.GetLength(1) ; j++ ){
-				for( int k = 0 ; k < grid.GetLength(1) ; k++ ){
+				for( int k = 0 ; k < grid.GetLength(2) ; k++ ){
 					str += grid[i, j, k] + ", ";
 				}
 
@@ -52,18 +66,22 @@ public class GameOfLife3D : MonoBehaviour {
 		print( "HIII" );
 
 		time = 0;
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if( time % change == 0 ){
+
+        //called from instantiate_to_beat instead
+		/*if( time % change == 0 ){
 			UpdateGrid();
 		}
 
-		time ++;
+		time ++;*/
 	}
 
-	void UpdateGrid (){
+	public void UpdateGrid (){
 		int x = grid.GetLength(0);
 		int y = grid.GetLength(1);
 		int z = grid.GetLength(2);
@@ -186,8 +204,12 @@ public class GameOfLife3D : MonoBehaviour {
 			for( int j = 0 ; j < grid.GetLength(1) ; j++ ){
 				for( int k = 0 ; k < grid.GetLength(2) ; k++ ){
 					if( grid[i,j,k] == 1 ){
-						object_grid[i,j,k] = Instantiate( cuber, new Vector3(i*space, j*space, k*space), Quaternion.identity);
-					}
+						object_grid[i,j,k] = Instantiate( cuber, new Vector3(i*space+x_offset, j*space, k*space), Quaternion.identity);
+                        object_grid[i, j, k].GetComponent<Renderer>().material.color = palette[Random.Range(0, 10)];
+                        object_grid[i, j, k].transform.parent = gameObject.transform;
+                        //experimenting shrinking cubes
+                        object_grid[i, j, k].AddComponent<shrink_and_destroy>();
+                    }
 				}
 			}
 		}
@@ -195,4 +217,18 @@ public class GameOfLife3D : MonoBehaviour {
 		
 
 	}
+
+    //wait for game_manager to set up palette, then grab it
+    IEnumerator wait_for_palette(float wait)
+    { 
+        
+        yield return new WaitForSeconds(wait);
+
+        System.Array.Copy(game_manager.instance.get_palette(), palette, 10);
+
+    }
+
+
+
+
 }

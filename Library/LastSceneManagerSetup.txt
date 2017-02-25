@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/dream_wave_VR.unity
-  isLoaded: 1
-  isActive: 1
